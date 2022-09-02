@@ -23,6 +23,7 @@
   },
   "plugins": ["react"],
   "rules": {
+    "linebreak-style": 0,
     "react/react-in-jsx-scope": "off",
     "no-restricted-exports": [
       "error",
