@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Navbar from '../../components/navbar';
 import Button from '../../components/button';
 import Spinner from '../../components/spinner';
 import TextField from '../../components/textField';
@@ -91,12 +92,15 @@ function TextFieldSection() {
 function App() {
   return (
     <main className="bg-slate-800 min-h-screen">
-      <Link to="/" className="underline text-white text-lg">
-        Go to Home
-      </Link>
-      <ButtonsSection />
-      <SpinnersSection />
-      <TextFieldSection />
+      <Navbar />
+      <div className="mt-8 px-4">
+        <Link to="/" className="underline text-white text-lg">
+          Go to Home
+        </Link>
+        <ButtonsSection />
+        <SpinnersSection />
+        <TextFieldSection />
+      </div>
     </main>
   );
 }
