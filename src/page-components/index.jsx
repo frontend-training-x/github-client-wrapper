@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom';
 
+import Navbar from '../components/navbar';
+
+function HeroSection() {
+  return (
+    <section>
+      <div>Hello world</div>
+    </section>
+  );
+}
+
 function Home() {
   return (
     <main>
-      <h1>I am the Home Page</h1>
+      <Navbar />
+      <HeroSection />
       <Link className="underline" to="/store">
         Go to store
       </Link>
