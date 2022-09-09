@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '../../components/button';
 import Spinner from '../../components/spinner';
+import TextField from '../../components/textField';
 
 function SectionContainer({ children }) {
   return <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">{children}</div>;
@@ -75,6 +76,18 @@ function ButtonsSection() {
   );
 }
 
+function TextFieldSection() {
+  return (
+    <div className="py-10 mx-4 flex flex-col gap-8">
+      <h1 className="text-2xl text-white">This is the Text Field Section</h1>
+      <SectionContainer>
+        <TextField variant="primary" />
+        <TextField variant="secondary" />
+      </SectionContainer>
+    </div>
+  );
+}
+
 function App() {
   return (
     <main className="bg-slate-800 min-h-screen">
@@ -83,6 +96,7 @@ function App() {
       </Link>
       <ButtonsSection />
       <SpinnersSection />
+      <TextFieldSection />
     </main>
   );
 }
