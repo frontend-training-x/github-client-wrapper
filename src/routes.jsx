@@ -13,7 +13,7 @@ function RoutesTree() {
       <Route path="/store" element={<StorePage />} />
 
       <Route path="/users/*" element={<UsersPage />}>
-        <Route path="details" element={<UserPage />} />
+        <Route path=":username" element={<UserPage />} />
       </Route>
     </Routes>
   );
