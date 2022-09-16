@@ -18,6 +18,10 @@ function Home() {
       <Link className="underline" to="/store">
         Go to store
       </Link>
+      <br />
+      <Link className="underline" to="/users">
+        Go to users
+      </Link>
     </main>
   );
 }

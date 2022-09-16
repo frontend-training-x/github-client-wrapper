@@ -40,7 +40,7 @@ function Navbar() {
       href: '#',
       current: isCurrentPath('/repos'),
     },
-    { name: 'Users', href: '#', current: isCurrentPath('/users') },
+    { name: 'Users', href: '/users', current: isCurrentPath('/users') },
     {
       name: 'Store',
       href: '/store',
