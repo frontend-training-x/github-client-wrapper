@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import HomePage from './page-components/index';
 import StorePage from './page-components/store';
-import UserPage from './page-components/UserPage';
-import UsersPage from './page-components/usersPage';
+import UserPage from './page-components/user-page';
+import UsersPage from './page-components/users-page';
 
 // Define your routes here
 function RoutesTree() {
@@ -11,10 +11,8 @@ function RoutesTree() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/store" element={<StorePage />} />
-
-      <Route path="/users/*" element={<UsersPage />}>
-        <Route path=":username" element={<UserPage />} />
-      </Route>
+      <Route path="/users" element={<UsersPage />} />
+      <Route path="users/:username" element={<UserPage />} />
     </Routes>
   );
 }

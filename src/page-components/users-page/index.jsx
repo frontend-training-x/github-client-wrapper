@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
 
@@ -34,7 +34,7 @@ function UsersPage() {
           </div>
         ))}
       </div>
-      <Outlet />
+
     </div>
   );
 }
