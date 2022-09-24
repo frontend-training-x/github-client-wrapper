@@ -2,8 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import HomePage from './page-components/index';
 import StorePage from './page-components/store';
-import UserPage from './page-components/user-page';
-import UsersPage from './page-components/users-page';
+import UserPage from './page-components/user-details';
+import UsersPage from './page-components/users-list';
 
 // Define your routes here
 function RoutesTree() {
