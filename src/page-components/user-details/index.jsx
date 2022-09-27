@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import getUsersDetails from '../../services/details-user';
+import getUserDetails from '../../services/details-user';
 
 import Navbar from '../../components/navbar/navbar';
 import getUsersRepos from '../../services/repos-user';
@@ -114,7 +114,7 @@ function UserPage() {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    getUsersDetails(username).then((data) => setUsers(data));
+    getUserDetails(username).then((data) => setUsers(data));
   }, []);
 
   return (

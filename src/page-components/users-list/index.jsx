@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
-import httpService from '../../services/config';
+import getUserDetails from '../../services/details-user';
 import getUsers from '../../services/list-users';
 
 function UserCard({ userData }) {
@@ -28,8 +28,6 @@ function UserCard({ userData }) {
     </div>
   );
 }
-
-const getUserDetails = (username) => httpService(`/users/${username}`).then((e) => e.json());
 
 function UsersPage() {
   const [users, setUsers] = useState([]);

@@ -1,5 +1,5 @@
 import httpService from './config';
 
-export default async function getUsersDetails(username) {
+export default async function getUserDetails(username) {
   return httpService(`/users/${username}`).then((e) => e.json());
 }
