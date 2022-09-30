@@ -63,7 +63,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "eslint --fix --rule \"react-hooks/exhaustive-deps: off\""
+      "eslint --fix --rule \"react-hooks/exhaustive-deps: off\" --max-warnings=0"
     ]
   }
 }
