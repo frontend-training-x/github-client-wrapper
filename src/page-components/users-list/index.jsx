@@ -14,14 +14,10 @@ function UserCard({ userData }) {
           <div className="text-md font-medium">
             <div>
               {userData.type}
-              {' '}
               name:
-              {' '}
               {userData.login}
             </div>
-            <div>
-              {userData.name}
-            </div>
+            <div>{userData.name}</div>
           </div>
         </div>
       </Link>
@@ -32,31 +28,37 @@ function UserCard({ userData }) {
 function UsersPage() {
   const [users, setUsers] = useState([]);
 
-  const handleSetUsersDetailsData = (userData) => Promise.all(
-    userData.map(async (user) => {
-      const userDetails = await getUserDetails(user.login);
+  const handleSetUsersDetailsData = userData =>
+    Promise.all(
+      userData.map(async user => {
+        const userDetails = await getUserDetails(user.login);
 
-      return {
-        ...user,
-        name: userDetails.name || ' ',
-        avatar: userDetails.avatar_url,
-      };
-    }),
-  );
+        return {
+          ...user,
+          name: userDetails.name || ' ',
+          avatar: userDetails.avatar_url,
+        };
+      }),
+    );
 
   useEffect(() => {
-    getUsers().then((data) => handleSetUsersDetailsData(data).then((newData) => setUsers(newData)));
+    getUsers().then(data => handleSetUsersDetailsData(data).then(newData => setUsers(newData)));
   }, []);
 
   return (
     <div className="bg-slate-600 min-h-screen">
       <Navbar />
       <div className="flex flex-wrap">
-        {users.length > 0 && users.map((user) => (// Si hay algún user (si vino de la api)
-          <div key={user.id} className="flex mx-2 my-3">
-            <UserCard key={user.id} userData={user} />
-          </div>
-        ))}
+        {users.length > 0 &&
+          users.map(
+            (
+              user, // Si hay algún user (si vino de la api)
+            ) => (
+              <div key={user.id} className="flex mx-2 my-3">
+                <UserCard key={user.id} userData={user} />
+              </div>
+            ),
+          )}
       </div>
     </div>
   );
