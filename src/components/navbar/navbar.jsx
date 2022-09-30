@@ -7,7 +7,7 @@ function DisclosurePanel({ hidden, navigation }) {
   return (
     <div className={clsx('sm:hidden', hidden && 'hidden')}>
       <div className="space-y-1 px-2 pt-2 pb-3">
-        {navigation.map((item) => (
+        {navigation.map(item => (
           <Link to={item.href} key={item.name}>
             <div
               className={clsx(
@@ -30,9 +30,9 @@ function Navbar() {
   const location = useLocation();
   const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
 
-  const isCurrentPath = (path) => path === location?.pathname;
+  const isCurrentPath = path => path === location?.pathname;
 
-  const handleToggleMobilePanelOpen = () => setMobilePanelOpen((prev) => !prev);
+  const handleToggleMobilePanelOpen = () => setMobilePanelOpen(prev => !prev);
 
   const navigation = [
     {
@@ -40,7 +40,7 @@ function Navbar() {
       href: '#',
       current: isCurrentPath('/repos'),
     },
-    { name: 'Users', href: '#', current: isCurrentPath('/users') },
+    { name: 'Users', href: '/users', current: isCurrentPath('/users') },
     {
       name: 'Store',
       href: '/store',
@@ -70,7 +70,7 @@ function Navbar() {
             </Link>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Link
                     className={clsx(
                       'transition-colors duration-200',
@@ -86,8 +86,7 @@ function Navbar() {
                   </Link>
                 ))}
               </div>
-            </div>
-            {' '}
+            </div>{' '}
           </div>
         </div>
         <DisclosurePanel navigation={navigation} hidden={!mobilePanelOpen} />
