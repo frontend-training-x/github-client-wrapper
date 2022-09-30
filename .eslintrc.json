@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -20,6 +20,7 @@
   },
   "plugins": ["react"],
   "rules": {
+    "max-len": ["error", { "code": 120, "ignoreUrls": true }],
     "linebreak-style": 0,
     "react/react-in-jsx-scope": "off",
     "no-restricted-exports": ["error", { "restrictedNamedExports": ["then"] }],
