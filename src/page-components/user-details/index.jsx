@@ -61,7 +61,6 @@ function UserDetails({ users }) {
         <div className="flex flex-wrap">
           <UsersIcon className="h-6 w-6 mr-1" />
           Fallowers:
-          {' '}
           <div className="font-semibold mx-1">{users.followers}</div>
           / Following:
           <div className="font-semibold mx-1">{users.following}</div>
