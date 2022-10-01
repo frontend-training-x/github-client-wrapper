@@ -33,13 +33,13 @@ function UserRepos({ username }) {
   const [repos, setRepos] = useState(null);
 
   useEffect(() => {
-    getUsersRepos(username).then((data) => setRepos(data));
+    getUsersRepos(username).then(data => setRepos(data));
   }, []);
 
   return (
     <div>
-      {repos !== null
-        && repos.map((repo) => (
+      {repos !== null &&
+        repos.map(repo => (
           <div key={repo.id}>
             <RepoContainer repo={repo} />
           </div>
@@ -61,8 +61,7 @@ function UserDetails({ users }) {
         <div className="flex flex-wrap">
           <UsersIcon className="h-6 w-6 mr-1" />
           Fallowers:
-          <div className="font-semibold mx-1">{users.followers}</div>
-          / Following:
+          <div className="font-semibold mx-1">{users.followers}</div>/ Following:
           <div className="font-semibold mx-1">{users.following}</div>
         </div>
         <div className="flex">
@@ -93,7 +92,7 @@ function UserPage() {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    getUserDetails(username).then((data) => setUsers(data));
+    getUserDetails(username).then(data => setUsers(data));
   }, []);
 
   return (
