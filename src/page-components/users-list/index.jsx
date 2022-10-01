@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
+import PaginationButton from '../../components/paginationButton';
 import getUsers from '../../services/list-users';
 
 function UserCard({ userData }) {
@@ -43,6 +44,9 @@ function UsersPage() {
               </div>
             ),
           )}
+      </div>
+      <div className="my-8">
+        <PaginationButton />
       </div>
     </div>
   );
