@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
-import PaginationButton from '../../components/paginationButton';
+import Pagination from '../../components/pagination';
 import getUsers from '../../services/list-users';
 
 function UserCard({ userData }) {
@@ -45,8 +45,14 @@ function UsersPage() {
             ),
           )}
       </div>
-      <div className="my-8">
-        <PaginationButton />
+      <div className="my-8 flex flex-wrap justify-between items-center bg-white border-t-2 border-gray-800 px-4 py-4">
+        <div>
+          <p className="text-sm text-gray-700">
+            Showing <span className="font-medium">1</span> to <span className="font-medium">30</span> of{' '}
+            <span className="font-medium">100</span> results
+          </p>
+        </div>
+        <Pagination page={1} count={100} />
       </div>
     </div>
   );
