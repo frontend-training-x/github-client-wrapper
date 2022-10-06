@@ -1,6 +1,6 @@
 const getPagesToRender = ({ page, count }) => {
-  const lowerBound = Math.max(1, page - 3); // At most 3 pages to the left
-  const upperBound = Math.min(count, page + 3); // At most 3 pages to the right
+  const lowerBound = Math.max(1, page - 2); // At most 2 pages to the left
+  const upperBound = Math.min(count, page + 2); // At most 2 pages to the right
 
   const pagesInLeft = [];
   const pagesInRight = [];

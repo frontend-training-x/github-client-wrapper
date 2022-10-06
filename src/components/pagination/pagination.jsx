@@ -1,62 +1,55 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import clsx from 'classnames/bind';
+
+import usePagination from '../../hooks/usePagination';
+
+// Esto es para no tener los estilos tan largos en el html
+const classes = clsx.bind({
+  root: 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20',
+  current: 'border-indigo-500 bg-indigo-50 text-indigo-600',
+  hasDots: 'bg-gray-50',
+});
+
+function PaginationItem({ current = false, hasDots = false, href, children }) {
+  return (
+    <a href={href} className={classes('root', current && 'current', hasDots && 'hasDots')}>
+      {children}
+    </a>
+  );
+}
 
 function Pagination({ page, count }) {
+  const { pagesInLeft, pagesInRight, shouldRenderLastPage, shouldRenderFirstPage } = usePagination({ page, count });
+
   return (
-    <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-      <a
-        href="#"
-        className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-      >
-        <span className="sr-only">Previous</span>
-        <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-      </a>
-      <a
-        href="#"
-        aria-current="page"
-        className="relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20"
-      >
-        {page}
-      </a>
-      <a
-        href="#"
-        className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-      >
-        {page + 1}
-      </a>
-      <a
-        href="#"
-        className="relative hidden items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 md:inline-flex"
-      >
-        {page + 2}
-      </a>
-      <span className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">
-        ...
-      </span>
-      <a
-        href="#"
-        className="relative hidden items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 md:inline-flex"
-      >
-        {count - 2}
-      </a>
-      <a
-        href="#"
-        className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-      >
-        {count - 1}
-      </a>
-      <a
-        href="#"
-        className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-      >
-        {count}
-      </a>
-      <a
-        href="#"
-        className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
-      >
-        <span className="sr-only">Next</span>
-        <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-      </a>
+    <nav className="isolate inline-flex rounded-md shadow-sm" aria-label="Pagination">
+      {/* Renderiza la pagina 1 */}
+      {shouldRenderFirstPage && (
+        <>
+          <PaginationItem>1</PaginationItem>
+          <PaginationItem hasDots>...</PaginationItem>
+        </>
+      )}
+
+      {/* Renderiza las paginas a la izquierda de page */}
+      {pagesInLeft.map(p => (
+        <PaginationItem key={p}>{p}</PaginationItem>
+      ))}
+
+      {/* Renderiza la pagina actual */}
+      <PaginationItem current>{page}</PaginationItem>
+
+      {/* Renderiza las paginas a la derecha de page */}
+      {pagesInRight.map(p => (
+        <PaginationItem key={p}>{p}</PaginationItem>
+      ))}
+
+      {/* Renderiza la pagina count */}
+      {shouldRenderLastPage && (
+        <>
+          <PaginationItem hasDots>...</PaginationItem>
+          <PaginationItem>{count}</PaginationItem>
+        </>
+      )}
     </nav>
   );
 }
