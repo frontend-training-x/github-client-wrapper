@@ -61,3 +61,13 @@ Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
 };
+
+PaginationItem.propTypes = {
+  current: PropTypes.bool,
+  hasDots: PropTypes.bool,
+};
+
+PaginationItem.defaultProps = {
+  current: false,
+  hasDots: false,
+};
