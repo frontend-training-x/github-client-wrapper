@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import clsx from 'classnames/bind';
 
 import usePagination from '../../hooks/usePagination';
@@ -55,3 +56,8 @@ function Pagination({ page, count }) {
 }
 
 export default Pagination;
+
+Pagination.propTypes = {
+  page: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
+};
