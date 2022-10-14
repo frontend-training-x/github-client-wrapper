@@ -24,6 +24,7 @@
     "react/react-in-jsx-scope": "off",
     "no-restricted-exports": ["error", { "restrictedNamedExports": ["then"] }],
     "react/prop-types": 0,
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
   }
 }

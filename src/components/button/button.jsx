@@ -15,9 +15,7 @@ const classes = clsx.bind({
   xl: 'py-4 px-8',
 });
 
-function Button({
-  variant, size = 'md', disabled, className, submit = false, isLoading, children, ...props
-}) {
+function Button({ variant, size = 'md', disabled, className, submit = false, isLoading, children, ...props }) {
   return (
     <button
       type={submit ? 'submit' : 'button'}
