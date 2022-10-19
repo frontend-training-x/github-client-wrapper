@@ -18,37 +18,47 @@ function PaginationItem({ current = false, hasDots = false, href, children }) {
   );
 }
 
-function Pagination({ page, count }) {
-  const { pagesInLeft, pagesInRight, shouldRenderLastPage, shouldRenderFirstPage } = usePagination({ page, count });
+function Pagination({ since, page, count }) {
+  const { pagesInLeft, pagesInRight, shouldRenderLastPage, shouldRenderFirstPage } = usePagination({
+    since,
+    page,
+    count,
+  });
 
   return (
     <nav className="isolate inline-flex rounded-md shadow-sm" aria-label="Pagination">
       {/* Renderiza la pagina 1 */}
       {shouldRenderFirstPage && (
         <>
-          <PaginationItem>1</PaginationItem>
+          <PaginationItem href={`?since=${0}`}>1</PaginationItem>
           <PaginationItem hasDots>...</PaginationItem>
         </>
       )}
 
       {/* Renderiza las paginas a la izquierda de page */}
       {pagesInLeft.map(p => (
-        <PaginationItem key={p}>{p}</PaginationItem>
+        <PaginationItem href={`?since=${p * 30 - 30}`} key={p}>
+          {p}
+        </PaginationItem>
       ))}
 
       {/* Renderiza la pagina actual */}
-      <PaginationItem current>{page}</PaginationItem>
+      <PaginationItem current href={`?since=${page * 30 - 30}`}>
+        {since / 30 + 1}
+      </PaginationItem>
 
       {/* Renderiza las paginas a la derecha de page */}
       {pagesInRight.map(p => (
-        <PaginationItem key={p}>{p}</PaginationItem>
+        <PaginationItem href={`?since=${p * 30 - 30}`} key={p}>
+          {p}
+        </PaginationItem>
       ))}
 
       {/* Renderiza la pagina count */}
       {shouldRenderLastPage && (
         <>
           <PaginationItem hasDots>...</PaginationItem>
-          <PaginationItem>{count}</PaginationItem>
+          <PaginationItem href={`?since=${count * 30 - 30}`}>{count}</PaginationItem>
         </>
       )}
     </nav>

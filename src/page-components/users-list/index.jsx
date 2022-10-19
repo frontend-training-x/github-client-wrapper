@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
 import Pagination from '../../components/pagination';
@@ -25,9 +25,12 @@ function UserCard({ userData }) {
 }
 
 function UsersPage() {
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get('since'));
+  const since = searchParams.get('since');
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    getUsers().then(data => setUsers(data));
+    getUsers(since).then(data => setUsers(data));
   }, []);
 
   return (
@@ -52,7 +55,7 @@ function UsersPage() {
             <span className="font-medium">100</span> results
           </p>
         </div>
-        <Pagination page={50} count={100} />
+        <Pagination since={since} page={1} count={100} />
       </div>
     </div>
   );

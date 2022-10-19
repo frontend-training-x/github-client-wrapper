@@ -1,14 +1,16 @@
-const getPagesToRender = ({ page, count }) => {
-  const lowerBound = Math.max(1, page - 2); // At most 2 pages to the left
-  const upperBound = Math.min(count, page + 2); // At most 2 pages to the right
+const getPagesToRender = ({ since, count }) => {
+  const realP = since / 30 + 1;
+
+  const lowerBound = Math.max(1, realP - 2); // At most 2 pages to the left
+  const upperBound = Math.min(count, realP + 2); // At most 2 pages to the right
 
   const pagesInLeft = [];
   const pagesInRight = [];
 
-  for (let i = lowerBound; i < page; i++) {
+  for (let i = lowerBound; i < realP; i++) {
     pagesInLeft.push(i);
   }
-  for (let i = page + 1; i <= upperBound; i++) {
+  for (let i = realP + 1; i <= upperBound; i++) {
     pagesInRight.push(i);
   }
 
@@ -27,8 +29,8 @@ const getPagesToRender = ({ page, count }) => {
 /**
   Logic for pagination component
 */
-const usePagination = ({ page, count }) => {
-  const result = getPagesToRender({ page, count });
+const usePagination = ({ since, count }) => {
+  const result = getPagesToRender({ since, count });
 
   return result;
 };
