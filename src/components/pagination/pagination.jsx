@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import clsx from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import usePagination from '../../hooks/usePagination';
 
@@ -11,14 +12,16 @@ const classes = clsx.bind({
 });
 
 function PaginationItem({ current = false, hasDots = false, href, children }) {
-  return (
-    <a href={href} className={classes('root', current && 'current', hasDots && 'hasDots')}>
+  return href ? (
+    <Link to={href} className={classes('root', current && 'current', hasDots && 'hasDots')}>
       {children}
-    </a>
+    </Link>
+  ) : (
+    <div className={classes('root', current && 'current', hasDots && 'hasDots')}>{children}</div>
   );
 }
 
-function Pagination({ page, count }) {
+function Pagination({ page, count, baseUrl }) {
   const { pagesInLeft, pagesInRight, shouldRenderLastPage, shouldRenderFirstPage } = usePagination({ page, count });
 
   return (
@@ -26,29 +29,35 @@ function Pagination({ page, count }) {
       {/* Renderiza la pagina 1 */}
       {shouldRenderFirstPage && (
         <>
-          <PaginationItem>1</PaginationItem>
+          <PaginationItem href={`${baseUrl}?page=1`}>1</PaginationItem>
           <PaginationItem hasDots>...</PaginationItem>
         </>
       )}
 
       {/* Renderiza las paginas a la izquierda de page */}
       {pagesInLeft.map(p => (
-        <PaginationItem key={p}>{p}</PaginationItem>
+        <PaginationItem href={`${baseUrl}?page=${p}`} key={p}>
+          {p}
+        </PaginationItem>
       ))}
 
       {/* Renderiza la pagina actual */}
-      <PaginationItem current>{page}</PaginationItem>
+      <PaginationItem href={`${baseUrl}?page=${page}`} current>
+        {page}
+      </PaginationItem>
 
       {/* Renderiza las paginas a la derecha de page */}
       {pagesInRight.map(p => (
-        <PaginationItem key={p}>{p}</PaginationItem>
+        <PaginationItem href={`${baseUrl}?page=${p}`} key={p}>
+          {p}
+        </PaginationItem>
       ))}
 
       {/* Renderiza la pagina count */}
       {shouldRenderLastPage && (
         <>
           <PaginationItem hasDots>...</PaginationItem>
-          <PaginationItem>{count}</PaginationItem>
+          <PaginationItem href={`${baseUrl}?page=${count}`}>{count}</PaginationItem>
         </>
       )}
     </nav>

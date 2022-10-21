@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import Navbar from '../../components/navbar';
 import Pagination from '../../components/pagination';
+import getAmountOfUsers from '../../services/get-amount-of-users';
 import getUsers from '../../services/list-users';
 
 function UserCard({ userData }) {
@@ -25,10 +26,17 @@ function UserCard({ userData }) {
 }
 
 function UsersPage() {
+  const [query] = useSearchParams();
+  const page = Number(query.get('page'));
   const [users, setUsers] = useState([]);
+  const [usersAmount, setUsersAmount] = useState(null);
+  const count = usersAmount && Math.ceil(usersAmount / 30);
+  const since = (page - 1) * 30;
+
   useEffect(() => {
-    getUsers().then(data => setUsers(data));
-  }, []);
+    getUsers({ page }).then(data => setUsers(data));
+    getAmountOfUsers().then(data => setUsersAmount(data.total_count));
+  }, [query]);
 
   return (
     <div className="bg-slate-600 min-h-screen">
@@ -45,15 +53,17 @@ function UsersPage() {
             ),
           )}
       </div>
-      <div className="my-8 flex flex-wrap justify-between items-center bg-white border-t-2 border-gray-800 px-4 py-4 overflow-x-scroll">
-        <div>
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">30</span> of{' '}
-            <span className="font-medium">100</span> results
-          </p>
+      {count && (
+        <div className="my-8 flex flex-wrap justify-between items-center bg-white border-t-2 border-gray-800 px-4 py-4 overflow-x-scroll">
+          <div>
+            <p className="text-sm text-gray-700">
+              Showing <span className="font-medium">{since}</span> to <span className="font-medium">{since + 30}</span>{' '}
+              of <span className="font-medium">{usersAmount}</span> results
+            </p>
+          </div>
+          <Pagination page={page} count={count} baseUrl="/users" />
         </div>
-        <Pagination page={50} count={100} />
-      </div>
+      )}
     </div>
   );
 }
